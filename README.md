@@ -2,24 +2,24 @@
 
 ## Cara menjalankan
 
-``` sh
+```sh
 npm install
 ```
 
 > atau
 
-``` sh
+```sh
 yarn
 ```
 
 Kemudian,
 
-``` sh
+```sh
 npm run start
 ```
 
 > atau
 
-``` sh
+```sh
 yarn start
 ```

@@ -1,10 +1,13 @@
 const gracefulStop = (server) => () => {
-  server.stop().then((err) => {
-    console.info('hapi server stopped');
-    process.exit(err ? 1 : 0);
-  }).catch((e) => {
-    console.error(e);
-  });
+  server
+    .stop()
+    .then((err) => {
+      console.info('hapi server stopped');
+      process.exit(err ? 1 : 0);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
 };
 
 const unexpectedErrorHandler = (server) => (error) => {

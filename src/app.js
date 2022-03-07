@@ -26,7 +26,7 @@ const init = async () => {
 
     await server.start();
 
-    server.log(['subsystem'], 'hello world')
+    server.log(['subsystem'], 'hello world');
   } catch (e) {
     logger.error(e);
     process.exit(1);
