@@ -1,10 +1,10 @@
-const pino = require('hapi-pino');
+const hapiPino = require('hapi-pino');
 
 module.exports = {
-  plugin: pino,
+  plugin: hapiPino,
   options: {
     logPayload: true,
-    prettyPrint: true,
+    prettyPrint: process.env.NODE_ENV !== 'production',
     level: 'debug',
   },
 };
