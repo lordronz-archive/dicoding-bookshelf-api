@@ -3,7 +3,7 @@ const books = require('../books');
 module.exports = (request, h) => {
   const { bookId } = request.params;
 
-  const book = books.find((el) => el.id === bookId);
+  const book = books.find((b) => b.id === bookId);
   if (!book) {
     return h
       .response({

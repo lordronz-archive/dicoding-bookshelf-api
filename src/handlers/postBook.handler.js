@@ -1,16 +1,16 @@
-const { nanoid } = require('nanoid');
+const { nanoid } = require('nanoid/async');
 const books = require('../books');
 const { validatePost } = require('../helper/validate');
 
-module.exports = (request, h) => {
-  const validationResult = validatePost(request.payload);
-  if (!validationResult[0]) {
+module.exports = async (request, h) => {
+  const [success, status, code, message] = validatePost(request.payload);
+  if (!success) {
     return h
       .response({
-        status: validationResult[1],
-        message: validationResult[3],
+        status,
+        message,
       })
-      .code(validationResult[2]);
+      .code(code);
   }
   const {
     name,
@@ -23,7 +23,7 @@ module.exports = (request, h) => {
     reading,
   } = request.payload;
   const newBook = {
-    id: nanoid(16),
+    id: await nanoid(),
     name,
     year,
     author,
@@ -37,12 +37,14 @@ module.exports = (request, h) => {
     updatedAt: new Date().toISOString(),
   };
   books.push(newBook);
-  const response = {
-    status: 'success',
-    message: 'Buku berhasil ditambahkan',
-    data: {
-      bookId: newBook.id,
-    },
-  };
-  return h.response(response).code(201);
+
+  return h
+    .response({
+      status: 'success',
+      message: 'Buku berhasil ditambahkan',
+      data: {
+        bookId: newBook.id,
+      },
+    })
+    .code(201);
 };

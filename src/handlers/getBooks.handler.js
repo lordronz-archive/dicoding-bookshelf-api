@@ -22,6 +22,7 @@ module.exports = (req) => {
     name: book.name,
     publisher: book.publisher,
   }));
+
   return {
     status: 'success',
     data: {

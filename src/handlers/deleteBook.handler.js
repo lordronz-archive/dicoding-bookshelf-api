@@ -3,7 +3,7 @@ const books = require('../books');
 module.exports = (request, h) => {
   const { bookId } = request.params;
 
-  const bookIndex = books.findIndex((el) => el.id === bookId);
+  const bookIndex = books.findIndex((book) => book.id === bookId);
   if (bookIndex === -1) {
     return h
       .response({

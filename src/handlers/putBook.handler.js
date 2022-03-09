@@ -2,14 +2,14 @@ const books = require('../books');
 const { validatePut } = require('../helper/validate');
 
 module.exports = (request, h) => {
-  const validationResult = validatePut(request.payload);
-  if (!validationResult[0]) {
+  const [success, status, code, message] = validatePut(request.payload);
+  if (!success) {
     return h
       .response({
-        status: validationResult[1],
-        message: validationResult[3],
+        status,
+        message,
       })
-      .code(validationResult[2]);
+      .code(code);
   }
   const {
     name,
@@ -48,6 +48,7 @@ module.exports = (request, h) => {
     reading,
     updatedAt: new Date().toISOString(),
   };
+
   return {
     status: 'success',
     message: 'Buku berhasil diperbarui',
