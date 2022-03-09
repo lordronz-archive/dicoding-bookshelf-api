@@ -1,9 +1,8 @@
-const { nanoid } = require('nanoid');
 const books = require('../books');
-const { validatePost } = require('../helper/validate');
+const { validatePut } = require('../helper/validate');
 
 module.exports = (request, h) => {
-  const validationResult = validatePost(request.payload);
+  const validationResult = validatePut(request.payload);
   if (!validationResult[0]) {
     return h
       .response({
@@ -22,8 +21,22 @@ module.exports = (request, h) => {
     readPage,
     reading,
   } = request.payload;
-  const newBook = {
-    id: nanoid(16),
+
+  const { bookId } = request.params;
+
+  const bookIndex = books.findIndex((el) => el.id === bookId);
+
+  if (bookIndex === -1) {
+    return h
+      .response({
+        status: 'fail',
+        message: 'Gagal memperbarui buku. Id tidak ditemukan',
+      })
+      .code(404);
+  }
+
+  books[bookIndex] = {
+    ...books[bookIndex],
     name,
     year,
     author,
@@ -33,16 +46,10 @@ module.exports = (request, h) => {
     readPage,
     finished: pageCount === readPage,
     reading,
-    insertedAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
-  books.push(newBook);
-  const response = {
+  return {
     status: 'success',
-    message: 'Buku berhasil ditambahkan',
-    data: {
-      bookId: newBook.id,
-    },
+    message: 'Buku berhasil diperbarui',
   };
-  return h.response(response).code(201);
 };

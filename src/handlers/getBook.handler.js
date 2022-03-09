@@ -5,10 +5,12 @@ module.exports = (request, h) => {
 
   const book = books.find((el) => el.id === bookId);
   if (!book) {
-    return h.response({
-      status: 'fail',
-      message: 'Buku tidak ditemukan',
-    }).code(404);
+    return h
+      .response({
+        status: 'fail',
+        message: 'Buku tidak ditemukan',
+      })
+      .code(404);
   }
 
   return {

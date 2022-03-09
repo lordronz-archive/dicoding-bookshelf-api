@@ -3,15 +3,10 @@ const Blankie = require('blankie');
 const Scooter = require('@hapi/scooter');
 const logging = require('./plugins/logging');
 const logger = require('./config/logger');
+const routes = require('./routes');
+const { serverConfig } = require('./config/config');
 
-const server = Hapi.server({
-  port: 5000,
-  host: 'localhost',
-  debug: false,
-  routes: {
-    cors: true,
-  },
-});
+const server = Hapi.server(serverConfig);
 
 const init = async () => {
   try {
@@ -23,6 +18,8 @@ const init = async () => {
         options: {},
       },
     ]);
+
+    server.route(routes);
 
     await server.start();
 
