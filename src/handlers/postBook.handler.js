@@ -23,7 +23,7 @@ module.exports = async (request, h) => {
     reading,
   } = request.payload;
   const newBook = {
-    id: await nanoid(),
+    id: await nanoid(16),
     name,
     year,
     author,
