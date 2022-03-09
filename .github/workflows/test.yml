@@ -1,0 +1,20 @@
+name: Jest Test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: 14.x
+      - name: Install deps
+        run: npm install
+      - name: Run test
+        run: npm run test
