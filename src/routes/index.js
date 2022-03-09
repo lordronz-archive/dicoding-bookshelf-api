@@ -3,5 +3,6 @@ const getBook = require('./getBook.route');
 const postBook = require('./postBook.route');
 const putBook = require('./putBook.route');
 const deleteBook = require('./deleteBook.route');
+const notFound = require('./notFound.route');
 
-module.exports = [getBooks, getBook, postBook, putBook, deleteBook];
+module.exports = [getBooks, getBook, postBook, putBook, deleteBook, notFound];
