@@ -28,7 +28,7 @@
     "@hapi/scooter": "^6.0.1",
     "blankie": "^5.0.0",
     "hapi-pino": "^9.3.0",
-    "nanoid": "^3.3.1",
+    "nanoid": "^3.3.2",
     "pino": "^7.9.2",
     "pino-pretty": "^7.6.0"
   }
